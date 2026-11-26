@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phoenix Analytics Club – DeKUT Chapter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0d0d0d;--sand:#ECD0A8;--cocoa:#7A5844;--bg:#F7F2EA;--surf:#fff;--tx:#17130F;--mut:#6f6359;--line:#e4d9c8;--ok:#3d7a4f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141210;--surf:#1d1a17;--tx:#f3ece1;--mut:#a39785;--line:#332d27;--ok:#6fbf86}}
+:root[data-theme="dark"]{--bg:#141210;--surf:#1d1a17;--tx:#f3ece1;--mut:#a39785;--line:#332d27;--ok:#6fbf86}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 "Bricolage Grotesque",system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sand);outline-offset:2px}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+aside{background:var(--ink);color:#fff;padding:26px 18px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;gap:12px;align-items:center;margin-bottom:26px}
+.logo{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--sand);display:grid;place-items:center;font:italic 600 22px "Cormorant Garamond",serif;color:var(--sand);flex:none}
+.brand b{display:block;font-size:15px;line-height:1.15}.brand small{color:#a89c8c;font-size:12px}
+nav button{width:100%;text-align:left;background:none;border:0;color:#c9bfb0;padding:12px 14px;border-radius:12px;font-weight:600;display:flex;gap:12px;align-items:center}
+nav button:hover{background:#1c1c1c;color:#fff}
+nav button[aria-current=page]{background:var(--sand);color:var(--ink)}
+.side-foot{font-size:12px;color:#8d8272;padding:0 6px}
+.demo-tag{display:inline-block;background:var(--cocoa);color:#fff;padding:3px 10px;border-radius:99px;font-size:12px;margin-bottom:8px}
+main{padding:30px clamp(16px,3.4vw,44px) 60px;min-width:0;max-width:1180px}
+h1,h2,h3{margin:0;letter-spacing:-.02em}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.head h2{font-size:clamp(28px,4vw,40px);font-weight:800}
+.head p{margin:4px 0 0;color:var(--mut)}
+.hero{background:var(--cocoa);color:#fff;border-radius:30px;padding:clamp(24px,4vw,46px);display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:end;margin-bottom:22px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;border:34px solid rgba(236,208,168,.22)}
+.hero h1{font-size:clamp(40px,7vw,84px);font-weight:800;line-height:.95;letter-spacing:-.045em}
+.hero h1 span{color:var(--sand)}
+.hero p{margin:16px 0 0;max-width:46ch;color:#f0e3d2}
+.next{background:rgba(0,0,0,.28);border-radius:20px;padding:18px;position:relative;z-index:1}
+.next small{color:var(--sand)}.next b{display:block;font-size:19px;margin:4px 0 12px;line-height:1.2}
+.btn{border:0;border-radius:12px;padding:11px 18px;font-weight:700;background:var(--ink);color:#fff}
+.btn.sand{background:var(--sand);color:var(--ink)}
+.btn.ghost{background:none;border:1.5px solid var(--line);color:var(--tx)}
+.btn:hover{filter:brightness(1.12)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.stat{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:18px}
+.stat b{display:block;font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.stat span{color:var(--mut);font-size:13px}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.panel{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:22px;min-width:0}
+.panel h3{font-size:19px;margin-bottom:14px}
+.bars{display:flex;align-items:flex-end;gap:12px;height:190px;padding-top:10px}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;background:none;border:0;height:100%;min-width:0}
+.bar i{display:block;width:100%;background:var(--sand);border-radius:10px 10px 4px 4px;transition:height .4s}
+.bar.on i{background:var(--cocoa)}.bar em{font-style:normal;font-size:12px;font-weight:700}.bar small{font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.row{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}.row .grow{flex:1;min-width:0}.row small{color:var(--mut);display:block}
+.av{width:38px;height:38px;border-radius:50%;background:var(--sand);color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
+.av.p{background:var(--ink);color:var(--sand)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+input,select,textarea{background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 13px;min-width:0}
+textarea{width:100%;resize:vertical}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:none;border-radius:99px;padding:7px 15px;font-weight:600}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+:root[data-theme=dark] .chip[aria-pressed=true]{background:var(--sand);color:var(--ink)}
+.tog{border:1.5px solid var(--line);background:none;border-radius:99px;padding:6px 14px;font-weight:700;min-width:96px}
+.tog.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.ring{display:flex;gap:18px;align-items:center}
+.ring svg{flex:none}
+.code{font-size:40px;font-weight:800;letter-spacing:.18em;background:var(--ink);color:var(--sand);border-radius:16px;padding:12px 18px;display:inline-block;margin:8px 0}
+.post{background:var(--ink);color:#fff;border-radius:22px;padding:26px;position:relative;overflow:hidden}
+.post .tag{color:var(--sand);font-size:13px;font-weight:700}
+.post h4{font-size:28px;line-height:1.05;letter-spacing:-.03em;margin:8px 0 14px;font-weight:800}
+.post p{margin:0 0 12px;white-space:pre-wrap;color:#e9ded0;font-size:14px}
+.post .fine{background:var(--sand);color:var(--ink);border-radius:12px;padding:8px 14px;font-weight:700;display:inline-block;font-size:13px}
+.form{display:grid;gap:12px}.form label{display:grid;gap:5px;font-weight:600;font-size:13px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pill{font-size:12px;font-weight:700;border-radius:99px;padding:3px 10px;background:var(--sand);color:var(--ink)}
+.pill.live{background:var(--ok);color:#fff}
+.empty{color:var(--mut);padding:16px 0}
+#toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:14px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:9;border:1px solid var(--sand)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.theme{background:none;border:1px solid #333;color:#e6dccb;border-radius:12px;padding:10px 14px;margin:auto 0 14px;font-weight:600;display:flex;gap:10px;align-items:center}
+.theme:hover{background:#1c1c1c}#ticon{display:inline-block;width:18px;text-align:center}
+.poster{display:block;width:100%;max-width:260px;border-radius:14px;margin-top:10px;border:1px solid var(--line)}
+.post .poster{max-width:100%;margin:0 0 14px;border-color:#333}
+#modal,#gate{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:20;display:grid;place-items:center;padding:20px}
+#modal[hidden]{display:none}
+.mbox{background:var(--surf);border-radius:22px;padding:16px;width:min(960px,100%);display:grid;gap:12px;justify-items:end}
+.mbox iframe,.mbox video{width:100%;height:min(62vh,540px);border:0;border-radius:14px;background:#000}
+.mbox p{margin:0;justify-self:start}
+a.btn{text-decoration:none;display:inline-block}
+.row{flex-wrap:wrap}.row .btn{padding:8px 13px;font-size:13px}
+body,.panel,.stat,input,select,textarea,.chip{transition:background-color .35s,color .35s,border-color .35s}
+:root[data-theme=dark] .btn:not(.sand):not(.ghost){background:var(--sand);color:var(--ink)}
+[hidden]{display:none!important}
+#site{background:var(--bg);min-height:100vh}
+.stop{position:sticky;top:0;z-index:6;background:var(--ink);color:#fff;display:flex;align-items:center;gap:20px;padding:12px clamp(16px,4vw,48px);padding-top:calc(12px + env(safe-area-inset-top,0px))}
+.stop .brand{margin:0}.sl{display:flex;gap:6px;margin-left:auto}
+.sl button{background:none;border:0;color:#d8cdbb;padding:8px 12px;border-radius:10px;font-weight:600}.sl button:hover{background:#1c1c1c;color:#fff}
+.sr{display:flex;gap:8px;align-items:center}.sr .theme{margin:0;padding:8px 12px}
+.sec{padding:clamp(44px,7vw,90px) clamp(16px,4vw,48px);max-width:1240px;margin:0 auto}
+.shero{background:var(--ink);color:#fff;padding:clamp(44px,8vw,110px) clamp(16px,4vw,48px)}
+.shero .in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.35fr 1fr;gap:40px;align-items:end}
+.shero h1{font-size:clamp(54px,10.5vw,150px);line-height:.88;font-weight:800;letter-spacing:-.055em}
+.shero h1 span{display:block;color:var(--sand)}
+.shero p{max-width:44ch;color:#d8cdbb;margin:22px 0 26px;font-size:17px}
+.ncard{background:var(--cocoa);border-radius:30px;padding:22px;color:#fff}
+.ncard .poster{max-width:100%;margin:0 0 14px}.ncard h3{font-size:26px;line-height:1.05;margin:4px 0}
+.cd{font-size:60px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--sand)}
+.pal{display:flex;gap:8px;margin-top:18px}.pal i{width:26px;height:26px;border-radius:50%;border:1.5px solid #ffffff66}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sh2{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-.04em;margin-bottom:24px;line-height:1}
+.evgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.ev .poster{max-width:100%}
+.joinb{background:var(--cocoa);color:#fff;border-radius:32px;padding:clamp(24px,5vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.joinb input,.joinb select{background:#ffffff1f;border-color:#ffffff44;color:#fff}.joinb option{color:#000}.joinb ::placeholder{color:#eadfce}
+.joinb label{color:#fff}
+footer.sf{padding:30px;text-align:center;color:var(--mut);border-top:1px solid var(--line)}
+@media (max-width:900px){.shero .in,.three,.joinb{grid-template-columns:1fr}.sl{display:none}.sr{margin-left:auto}}
+@media (max-width:900px){.theme{margin:0 0 0 auto;flex:none;padding:9px 12px}#tlabel{display:none}}
+@media (max-width:900px){
+.app{grid-template-columns:1fr}
+aside{position:sticky;height:auto;flex-direction:row;align-items:center;padding:10px 12px;overflow-x:auto;z-index:5;top:0;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.brand{margin:0}.brand div,.side-foot{display:none}
+nav{display:flex;gap:4px}nav button{white-space:nowrap;padding:9px 13px}
+.hero,.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+.app{display:block}
+aside{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;height:auto;min-height:0;overflow:visible;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top,0px));position:sticky;top:0;z-index:5}
+aside .brand{order:1;margin:0;flex:none}
+aside .brand .logo,.stop .brand .logo{display:grid;width:36px;height:36px;font-size:18px}
+aside .theme{order:2;margin:0 0 0 auto;padding:8px 12px}
+aside nav{order:3;flex:0 0 100%;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+aside nav::-webkit-scrollbar{display:none}
+aside nav button{width:auto;flex:none;white-space:nowrap;padding:8px 12px;font-size:14px}
+.stop .brand b,.dl{display:none}
+.stop{gap:10px}
+}
+#rcount{display:inline-flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;padding:8px 18px;font-size:14px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><div class="logo">PA</div><div><b>Phoenix Analytics</b><small>DeKUT Chapter</small></div></div>
+  <nav id="nav"></nav>
+  <button class="theme" id="theme" aria-pressed="false"><span id="ticon" aria-hidden="true">☾</span><span id="tlabel">Dark mode</span></button>
+  <div class="side-foot"><span class="demo-tag">Interactive demo</span><br>Changes reset when you reload. Try everything.</div>
+</aside>
+<main id="view"></main>
+</div>
+<div id="site" hidden><header class="stop"><div class="brand"><div class="logo">PA</div><b>Phoenix Analytics</b></div><nav class="sl" aria-label="Site sections"><button data-act="home">Home</button><button data-sc="s-events">Events</button><button data-sc="s-res">Resources</button><button data-sc="s-research">Research</button><button data-sc="s-join">Join</button></nav><div class="sr"><button class="btn ghost" style="color:#fff;border-color:#fff6;padding:8px 14px" data-act="roll">Roll call</button><button class="theme" id="theme2" aria-label="Toggle light or dark mode">☾</button><button class="btn sand" style="padding:8px 14px" data-act="dash">Officials<span class="dl"> dashboard</span></button></div></header><div id="sbody"></div></div>
+<div id="gate" hidden><div class="mbox gbox" role="dialog" aria-modal="true" aria-label="Officials sign in" style="max-width:420px;justify-items:stretch"><h3>Officials sign in</h3><p style="margin:0;color:var(--mut)">Enter the club password to open the dashboard.</p><label style="display:grid;gap:5px;font-weight:600;font-size:13px">Password<input id="gpw" type="password" autocomplete="current-password"></label><div class="toolbar" style="margin:0"><button class="btn" data-act="unlock">Unlock dashboard</button><button class="btn ghost" data-act="gclose">Cancel</button></div></div></div>
+<div id="modal" hidden><div class="mbox" role="dialog" aria-modal="true" aria-label="Preview"><button class="btn sand" data-close>Close</button><div id="mbody" style="width:100%"></div></div></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const initials=n=>n.split(' ').map(w=>w[0]).slice(0,2).join('');
+const names=["Brian Kamau","Faith Wanjiru","Kevin Otieno","Mercy Njeri","Dennis Mwangi","Grace Achieng","Samuel Kiprono","Naomi Wairimu","Victor Mutua","Esther Chebet","Allan Kariuki","Linet Auma","Peter Maina","Joy Nyambura"];
+const courses=["Electrical Eng.","Computer Sci.","Mechanical Eng.","Statistics","Civil Eng.","IT"];
+let members=names.map((n,i)=>({id:i+1,name:n,course:courses[i%6],contact:"",joined:"Sample data"}));
+const seedP=[[1,2,3,4,5,6,7,8,9,10,11,12],[1,2,3,4,5,6,8,9,10,13],[1,2,4,5,6,7,8,9,10,11,12,13,14],[1,3,4,5,8,9,11,12,14],[1,2,3,4,5,6,7,8,9,10,11,12,13,14]];
+const sesTitles=[["Intro to Python for data","3 Sep"],["Pandas and data cleaning","24 Sep"],["Visualisation with Matplotlib","15 Oct"],["Intro to machine learning","29 Oct"],["Anniversary kickoff","12 Nov"]];
+let sessions=sesTitles.map((s,i)=>({id:i+1,title:s[0],date:s[1],present:new Set(seedP[i])}));
+let events=[
+ {id:1,title:"One Year Anniversary",date:"13 November 2026",time:"1:00 PM – 5:00 PM",venue:"Nelion Dome, DeKUT",summary:"We’re celebrating a year of data, models and good company. Dress code: black, white, beige or brown. Tickets KES 200.",live:true,upcoming:false},
+ {id:2,title:"Intro to Neural Networks",date:"4 December 2026",time:"4:00 PM – 6:00 PM",venue:"Lecture Hall 3, DeKUT",summary:"A hands-on session building a first neural network in Python. Bring your laptop.",live:true,upcoming:true,meet:"https://meet.google.com/abc-defg-hij"}];
+let queue=[];
+const demoDeck='<!doctype html><body style="margin:0;display:grid;place-items:center;height:100vh;background:#7A5844;color:#fff;font-family:sans-serif;text-align:center"><div><h1 style="font-size:56px;margin:0">Anniversary kickoff</h1><p>Sample HTML slide from Phoenix Analytics Club</p></div></body>';
+sessions[4].mats=[{id:1,type:"Presentation",title:"Kickoff slides (sample)",kind:"html",content:demoDeck},{id:2,type:"Recording",title:"Session recording (sample link)",kind:"link",url:"https://www.youtube.com/"}];
+sessions[3].mats=[{id:3,type:"Notebook",title:"Intro to ML notebook (sample link)",kind:"link",url:"https://colab.research.google.com/"},{id:4,type:"Spreadsheet",title:"Sample dataset sheet (sample link)",kind:"link",url:"https://docs.google.com/spreadsheets/"}];
+sessions.forEach(s=>s.mats=s.mats||[]);
+const S={view:"overview",topic:"All",mt:"All",ses:5,filter:"all",q:"",code:null,ev:2,ch:"WhatsApp",tone:"Hype"};
+const views={overview:"Overview",attendance:"Attendance",members:"Members",marketing:"Marketing",events:"Events",materials:"Materials",research:"Research"};
+const icons={overview:"◧",attendance:"✓",members:"☰",marketing:"✦",events:"▤",materials:"▣",research:"✎"};
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2200)}
+function nav(){$("#nav").innerHTML=Object.keys(views).map(k=>`<button data-go="${k}" ${S.view===k?'aria-current="page"':''}><span aria-hidden="true">${icons[k]}</span>${views[k]}</button>`).join("")+`<button data-act="site"><span aria-hidden="true">↗</span>Public site</button><button data-act="lock"><span aria-hidden="true">⌫</span>Lock dashboard</button>`}
+const cur=()=>sessions.find(s=>s.id===S.ses);
+const pct=s=>Math.round(s.present.size/members.length*100);
+function ring(p){const r=42,c=2*Math.PI*r;return `<svg width="110" height="110" viewBox="0 0 110 110" role="img" aria-label="${p}% present"><circle cx="55" cy="55" r="${r}" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="55" cy="55" r="${r}" fill="none" stroke="var(--cocoa)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${c*p/100} ${c}" transform="rotate(-90 55 55)"/><text x="55" y="62" text-anchor="middle" font-size="22" font-weight="800" fill="currentColor">${p}%</text></svg>`}
+function chart(){const max=members.length;return `<div class="bars">${sessions.map(s=>`<button class="bar ${s.id===S.ses?'on':''}" data-pick="${s.id}" aria-label="${esc(s.title)}: ${s.present.size} present"><em>${s.present.size}</em><i style="height:${s.present.size/max*100*.78}%"></i><small>${esc(s.date)}</small></button>`).join("")}</div>`}
+function overview(){
+ const avg=Math.round(sessions.reduce((a,s)=>a+pct(s),0)/sessions.length),up=events.find(e=>e.upcoming);
+ return `<section class="hero"><div><h1>Where data meets <span>people.</span></h1><p>Run attendance, promote events and post club news from one place. This demo uses sample data, so click around freely.</p></div>
+ <div class="next"><small>Next event</small><b>${up?esc(up.title):'Nothing scheduled'}</b>${up?`<small>${esc(up.date)} · ${esc(up.venue)}</small><br><br><button class="btn sand" data-go="marketing">Promote this event</button>${up.meet?` <a class="btn ghost" style="color:#fff;border-color:#fff8" href="${esc(up.meet)}" target="_blank" rel="noopener">Join on Meet</a>`:''}`:`<button class="btn sand" data-go="events">Add an event</button>`}</div></section>
+ <div class="stats"><div class="stat"><b>${members.length}</b><span>Members</span></div><div class="stat"><b>${avg}%</b><span>Average attendance</span></div><div class="stat"><b>${sessions.length}</b><span>Sessions held</span></div><div class="stat"><b>${events.filter(e=>e.live).length}</b><span>Posts published</span></div></div>
+ <div class="grid2"><div class="panel"><h3>Attendance by session</h3>${chart()}<p style="color:var(--mut);margin:12px 0 0;font-size:13px">Selected: ${esc(cur().title)}. <a href="#" data-go="attendance" style="color:var(--cocoa);font-weight:700">Open register</a></p></div>
+ <div class="panel"><h3>Latest from the club</h3>${events.filter(e=>e.live).map(e=>`<div class="row"><div class="av p">PA</div><div class="grow"><b>${esc(e.title)}</b><small>${esc(e.date)}</small></div></div>`).join("")||'<p class="empty">No published posts yet.</p>'}</div></div>`}
+function attendance(){
+ const s=cur(),list=members.filter(m=>m.name.toLowerCase().includes(S.q.toLowerCase())&&(S.filter==="all"||(S.filter==="present")===s.present.has(m.id)));
+ return `<div class="head"><div><h2>Attendance</h2><p>Mark the register by hand or let members check themselves in with a code.</p></div>
+ <select id="ses" aria-label="Session">${sessions.map(x=>`<option value="${x.id}" ${x.id===S.ses?'selected':''}>${esc(x.title)} (${esc(x.date)})</option>`).join("")}</select></div>
+ <div class="grid2"><div class="panel"><div class="toolbar"><input id="q" placeholder="Search members" value="${esc(S.q)}" aria-label="Search members"><div class="chips">${["all","present","absent"].map(f=>`<button class="chip" data-f="${f}" aria-pressed="${S.filter===f}">${f[0].toUpperCase()+f.slice(1)}</button>`).join("")}</div></div>
+ ${list.map(m=>`<div class="row"><div class="av">${initials(m.name)}</div><div class="grow"><b>${esc(m.name)}</b><small>${esc(m.course)}</small></div><button class="tog ${s.present.has(m.id)?'on':''}" data-mark="${m.id}">${s.present.has(m.id)?'Present':'Absent'}</button></div>`).join("")||'<p class="empty">No members match. Clear the search or filter.</p>'}</div>
+ <div style="display:grid;gap:18px;align-content:start"><div class="panel"><h3>This session</h3><div class="ring">${ring(pct(s))}<div><b style="font-size:24px">${s.present.size} of ${members.length}</b><br><span style="color:var(--mut)">members present</span></div></div><div class="toolbar" style="margin:16px 0 0"><button class="btn ghost" data-act="markall">Mark all present</button><button class="btn ghost" data-act="copyreg">Copy register</button><button class="btn ghost" data-act="xl-att">Download Excel</button></div></div>
+ <div class="panel"><h3>Roll call</h3><p style="margin:0 0 12px;color:var(--mut)">Open roll call and members mark themselves present from the club site. No code needed.</p><span class="pill ${s.open?'live':''}">${s.open?'Open for this session':'Closed'}</span><div class="toolbar" style="margin:14px 0 0"><button class="btn" data-act="rolltog">${s.open?'Close roll call':'Open roll call'}</button><button class="btn ghost" data-act="rolllink">Copy member link</button></div>
+ </div>
+ <div class="panel"><h3>Add a member</h3><div class="toolbar" style="margin:0"><input id="nm" placeholder="Full name" aria-label="Full name"><button class="btn" data-act="addm">Add</button></div></div></div></div>`}
+function caption(e){return caption0(e)+(e.meet?"\n\nJoin online: "+e.meet:"")}
+function caption0(e){
+ const hype=S.tone==="Hype",ch=S.ch,tags="#PhoenixAnalytics #DeKUT #DataScience #AI";
+ const d=`${e.date}, ${e.time}\n${e.venue}`;
+ if(ch==="X")return hype?`${e.title} is coming to DeKUT. ${d.replace("\n"," at ")}. Be there. ${tags}`:`Phoenix Analytics Club invites you to ${e.title}, ${e.date}, ${e.venue}. ${tags}`;
+ if(ch==="LinkedIn")return `Phoenix Analytics Club – DeKUT Chapter presents ${e.title}.\n\n${e.summary}\n\n${d}\n\n${tags}`;
+ return hype?`🔥 ${e.title.toUpperCase()} 🔥\n\n${e.summary}\n\n📅 ${e.date}\n⏰ ${e.time}\n📍 ${e.venue}\n\nTell a friend and bring a laptop.\n${ch==="Instagram"?tags:""}`.trim():`Phoenix Analytics Club – DeKUT Chapter\n\nYou are invited to ${e.title}.\n\n${e.summary}\n\nDate: ${e.date}\nTime: ${e.time}\nVenue: ${e.venue}`}
+function marketing(){
+ const e=events.find(x=>x.id===S.ev)||events[0];if(!e)return `<div class="head"><h2>Marketing</h2></div><p class="empty">Add an event first.</p>`;
+ if(S.draft===undefined||S.draftKey!==[e.id,S.ch,S.tone].join())S.draft=caption(e),S.draftKey=[e.id,S.ch,S.tone].join();
+ return `<div class="head"><div><h2>Marketing</h2><p>Turn any event into a ready-to-send post, then schedule it.</p></div></div>
+ <div class="grid2"><div class="panel"><div class="form"><label>Event<select id="ev">${events.map(x=>`<option value="${x.id}" ${x.id===e.id?'selected':''}>${esc(x.title)}</option>`).join("")}</select></label>
+ <div><b style="font-size:13px">Channel</b><div class="chips" style="margin-top:6px">${["WhatsApp","Instagram","X","LinkedIn"].map(c=>`<button class="chip" data-ch="${c}" aria-pressed="${S.ch===c}">${c}</button>`).join("")}</div></div>
+ <div><b style="font-size:13px">Tone</b><div class="chips" style="margin-top:6px">${["Hype","Formal"].map(c=>`<button class="chip" data-tone="${c}" aria-pressed="${S.tone===c}">${c}</button>`).join("")}</div></div>
+ <label>Caption (editable)<textarea id="cap" rows="9">${esc(S.draft)}</textarea></label>
+ <div class="toolbar" style="margin:0"><button class="btn" data-act="copycap">Copy caption</button><input type="datetime-local" id="when" aria-label="Schedule time"><button class="btn sand" data-act="sched">Schedule post</button></div></div></div>
+ <div style="display:grid;gap:18px;align-content:start"><div class="post">${e.poster?`<img class="poster" src="${e.poster}" alt="Event poster">`:''}<span class="tag">Phoenix Analytics Club · ${S.ch}</span><h4>${esc(e.title)}</h4><p>${esc(S.draft.split("\n").slice(0,4).join("\n"))}</p><span class="fine">${esc(e.date)}</span></div>
+ <div class="panel"><h3>Scheduled</h3>${queue.map((q,i)=>`<div class="row"><div class="grow"><b>${esc(q.title)}</b><small>${q.ch} · ${esc(q.when)}</small></div><button class="btn ghost" data-unq="${i}">Remove</button></div>`).join("")||'<p class="empty">Nothing scheduled. Pick a time and press Schedule post.</p>'}</div></div></div>`}
+function eventsView(){
+ return `<div class="head"><div><h2>Events and news</h2><p>Post club updates. Published items appear on the public site.</p></div></div>
+ <div class="grid2"><div class="panel"><h3>Club feed</h3>${events.map(e=>`<div class="row" style="align-items:flex-start"><div class="av p">PA</div><div class="grow"><b>${esc(e.title)}</b> <span class="pill ${e.live?'live':''}">${e.live?'Published':'Draft'}</span><small>${esc(e.date)} · ${esc(e.venue)}</small><p style="margin:6px 0 0;font-size:14px">${esc(e.summary)}</p>${e.poster?`<img class="poster" src="${e.poster}" alt="Poster for ${esc(e.title)}">`:''}<div class="toolbar" style="margin:10px 0 0">${e.meet?`<a class="btn sand" href="${esc(e.meet)}" target="_blank" rel="noopener">Join on Google Meet</a>`:''}<button class="btn ${e.live?'ghost':''}" data-pub="${e.id}">${e.live?'Unpublish':'Publish'}</button><button class="btn ghost" data-del="${e.id}">Delete</button></div></div></div>`).join("")||'<p class="empty">No posts yet. Write your first one on the right.</p>'}</div>
+ <div class="panel"><h3>New post</h3><div class="form"><label>Title<input id="et"></label><div class="two"><label>Date<input id="ed" placeholder="e.g. 4 December 2026"></label><label>Time<input id="ei" placeholder="4:00 PM – 6:00 PM"></label></div><label>Venue<input id="ev2"></label><label>Summary<textarea id="es" rows="4"></textarea></label><label>Google Meet link (optional)<input id="em" placeholder="https://meet.google.com/abc-defg-hij"></label><label>Poster (image, up to 5 MB)<input type="file" id="ep" accept="image/*"></label><img id="pprev" class="poster" alt="Poster preview" hidden><button class="btn" data-act="addev">Save as draft</button></div></div></div>`}
+const mtypes={Presentation:"▶",Recording:"●",Notebook:"{ }",Spreadsheet:"▦",Other:"▢"};
+const guess=n=>{n=n.toLowerCase();return /\.html?$/.test(n)?"Presentation":/\.(mp4|webm|mov)$/.test(n)?"Recording":/\.(ipynb|py)$/.test(n)?"Notebook":/\.(xlsx?|csv)$/.test(n)?"Spreadsheet":"Other"};
+const fsz=b=>b>1048576?(b/1048576).toFixed(1)+" MB":Math.max(1,Math.round(b/1024))+" KB";
+function materials(){
+ const s=cur(),list=s.mats.filter(m=>S.mt==="All"||m.type===S.mt);
+ return `<div class="head"><div><h2>Session materials</h2><p>Slides, recordings, notebooks and spreadsheets, kept with the session they belong to.</p></div>
+ <select id="msel" aria-label="Session">${sessions.map(x=>`<option value="${x.id}" ${x.id===S.ses?'selected':''}>${esc(x.title)} (${esc(x.date)})</option>`).join("")}</select></div>
+ <div class="grid2"><div class="panel"><div class="chips" style="margin-bottom:10px">${["All",...Object.keys(mtypes)].map(t=>`<button class="chip" data-mt="${t}" aria-pressed="${S.mt===t}">${t}</button>`).join("")}</div>
+ ${list.map(m=>`<div class="row"><div class="av">${mtypes[m.type]}</div><div class="grow"><b>${esc(m.title)}</b><small>${m.type}${m.name?` · ${esc(m.name)} · ${fsz(m.size)}`:''}</small></div>${m.kind==="link"?`<a class="btn sand" href="${esc(m.url)}" target="_blank" rel="noopener">Open</a>`:`<button class="btn sand" data-prev="${m.id}">Preview</button>`}${m.url&&m.kind!=="link"?`<a class="btn ghost" href="${m.url}" download="${esc(m.name)}">Download</a>`:''}<button class="btn ghost" data-delmat="${m.id}" aria-label="Remove ${esc(m.title)}">Remove</button></div>`).join("")||'<p class="empty">No materials here yet. Add the first one on the right.</p>'}</div>
+ <div style="display:grid;gap:18px;align-content:start"><div class="panel"><h3>Add material</h3><div class="form"><label>Type<select id="mtype">${Object.keys(mtypes).map(t=>`<option>${t}</option>`).join("")}</select></label><label>Title<input id="mtitle"></label><label>Link (Drive, YouTube, Colab)<input id="mlink" placeholder="https://"></label><label>Or upload a file<input type="file" id="mfile" accept=".html,.htm,.mp4,.webm,.ipynb,.py,.xlsx,.xls,.csv,.pdf"></label><button class="btn" data-act="addmat">Add to session</button></div></div>
+ <div class="panel"><h3>New session</h3><div class="toolbar" style="margin:0"><input id="sn" placeholder="Session title" aria-label="Session title"><button class="btn" data-act="addses">Create</button></div></div></div></div>`}
+function addMat(){
+ const s=cur(),f=$("#mfile").files[0],l=$("#mlink").value.trim(),type=$("#mtype").value,title=$("#mtitle").value.trim();
+ if(!f&&!l)return toast("Paste a link or choose a file first");
+ if(!f&&!/^https?:\/\//i.test(l))return toast("The link must start with https://");
+ const id=Date.now(),done=m=>{s.mats.unshift(m);toast("Added to "+s.title);rerender()};
+ if(!f)return done({id,type,title:title||l,kind:"link",url:l});
+ const base={id,type,title:title||f.name,name:f.name,size:f.size,url:URL.createObjectURL(f)};
+ if(/\.html?$/i.test(f.name)){const r=new FileReader();r.onload=()=>done({...base,kind:"html",content:r.result});r.readAsText(f)}else done({...base,kind:"file"})}
+function openModal(m){const b=$("#mbody");b.innerHTML="";let el;
+ if(m.kind==="html"){el=document.createElement("iframe");el.sandbox="allow-scripts";el.srcdoc=m.content;el.title=m.title}
+ else if(m.type==="Recording"){el=document.createElement("video");el.controls=true;el.src=m.url}
+ else if(/\.pdf$/i.test(m.name||"")){el=document.createElement("iframe");el.src=m.url;el.title=m.title}
+ else{el=document.createElement("p");el.textContent=(m.name||m.title)+" can’t be previewed in the browser. Use Download to open it in Excel or Jupyter."}
+ b.appendChild(el);$("#modal").hidden=false;if(window.gsap)gsap.fromTo(".mbox",{y:40,opacity:0,scale:.96},{y:0,opacity:1,scale:1,duration:.4,ease:"power3.out",clearProps:"transform,opacity"})}
+function closeModal(){$("#mbody").innerHTML="";$("#modal").hidden=true}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();$("#gate").hidden=true}});
+function showPoster(){const p=$("#pprev");if(p&&S.poster){p.src=S.poster;p.hidden=false}}
+function after(full){showPoster();
+ const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;if(!window.gsap||rm)return;
+ const kp="transform,opacity";
+ if(!S.seen){S.seen=1;gsap.from(".brand,#nav button,.theme",{x:-24,opacity:0,stagger:.06,duration:.5,ease:"power3.out",clearProps:kp})}
+ if(S.pulse){gsap.fromTo(`[data-mark="${S.pulse}"]`,{scale:.82},{scale:1,duration:.45,ease:"back.out(3)",clearProps:kp});S.pulse=null}
+ if(!full)return;
+ const tl=gsap.timeline({defaults:{ease:"power3.out",clearProps:kp}});
+ if(S.view==="overview"){
+  tl.from(".hero",{y:30,opacity:0,duration:.7}).from(".hero h1",{y:44,opacity:0,duration:.8},"-=.45").from(".hero p,.next",{y:20,opacity:0,stagger:.12,duration:.6},"-=.5").from(".stat",{y:24,opacity:0,stagger:.08,duration:.5},"-=.3").from(".grid2 .panel",{y:24,opacity:0,stagger:.1,duration:.55},"-=.3").from(".bar i",{scaleY:0,transformOrigin:"bottom",stagger:.07,duration:.8},"-=.5");
+  document.querySelectorAll(".stat b").forEach(b=>{const m=b.textContent.match(/^(\d+)(%?)$/);if(m){const o={v:0};gsap.to(o,{v:+m[1],duration:1.2,delay:.6,ease:"power2.out",onUpdate:()=>b.textContent=Math.round(o.v)+m[2]})}})
+ }else{
+  tl.from(".head",{y:24,opacity:0,duration:.5}).from(".panel,.post",{y:28,opacity:0,stagger:.1,duration:.55},"-=.25").from(".row",{x:-16,opacity:0,stagger:.025,duration:.35},"-=.45")}}
+const viewMap=()=>({overview,attendance,members:membersView,marketing,events:eventsView,materials,research:researchView})[S.view]();
+function render(){nav();$("#view").innerHTML=viewMap();window.scrollTo(0,0);after(true)}
+function rerender(){const y=scrollY;nav();$("#view").innerHTML=viewMap();scrollTo(0,y);after(false)}
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-go],[data-pick],[data-f],[data-mark],[data-act],[data-ch],[data-tone],[data-unq],[data-pub],[data-del],[data-prev],[data-delmat],[data-mt],[data-close],[data-sc],[data-read],[data-topic],[data-appr],[data-delp],[data-here]");if(e.target.id==="modal")return closeModal();if(!t)return;
+ const d=t.dataset,s=cur();
+ if(d.go){e.preventDefault();S.view=d.go;location.hash=d.go;return render()}
+ if(d.pick){S.ses=+d.pick;return rerender()}
+ if(d.f){S.filter=d.f;return rerender()}
+ if(d.mark){const i=+d.mark;s.present.has(i)?s.present.delete(i):s.present.add(i);S.pulse=i;return rerender()}
+ if(d.ch){S.ch=d.ch;return rerender()}
+ if(d.tone){S.tone=d.tone;return rerender()}
+ if(d.unq){queue.splice(+d.unq,1);toast("Removed from schedule");return rerender()}
+ if(d.pub){const x=events.find(v=>v.id==d.pub);x.live=!x.live;toast(x.live?"Published":"Unpublished");return rerender()}
+ if(d.del){events=events.filter(v=>v.id!=d.del);if(!events.find(v=>v.id===S.ev))S.ev=(events[0]||{}).id;toast("Deleted");return rerender()}
+ if(d.close)return closeModal();
+ if(d.mt){S.mt=d.mt;return rerender()}
+ if(d.prev){return openModal(sessions.flatMap(x=>x.mats).find(x=>x.id==d.prev))}
+ if(d.sc){const go=()=>{const el=document.getElementById(d.sc);if(el)el.scrollIntoView({behavior:"smooth"})};if(S.page==="roll"){S.page="home";setSite(true);setTimeout(go,80)}else go();return}
+ if(d.here){const rs=sessions.find(x=>x.open);if(!rs)return toast("Roll call has closed");const m=members.find(x=>x.id==d.here);rs.present.add(m.id);$("#rlist").innerHTML=rollList();$("#rcount").textContent=rs.present.size+" of "+members.length+" present";return toast("Thanks, "+m.name.split(" ")[0]+". You’re marked present.")}
+ if(d.read)return openArticle(papers.find(x=>x.id==d.read));
+ if(d.topic){S.topic=d.topic;$("#pwrap").innerHTML=researchBlock();return}
+ if(d.appr){const p=papers.find(x=>x.id==d.appr);p.status=p.status==="published"?"pending":"published";toast(p.status==="published"?"Published on the public site":"Moved back to pending");return rerender()}
+ if(d.delp){papers=papers.filter(x=>x.id!=d.delp);toast("Submission deleted");return rerender()}
+ if(d.delmat){s.mats=s.mats.filter(x=>x.id!=d.delmat);toast("Material removed");return rerender()}
+ const a=d.act;
+ if(a==="xl-mem")return xlMem();
+ if(a==="xl-att")return xlAtt();
+ if(a==="rolltog"){const was=s.open;sessions.forEach(x=>x.open=false);s.open=!was;toast(s.open?"Roll call is open for "+s.title:"Roll call closed");return rerender()}
+ if(a==="rolllink"){const u=location.href.split("#")[0]+"#rollcall";try{navigator.clipboard.writeText(u).then(()=>toast("Member link copied"),()=>toast(u))}catch(_){toast(u)}return}
+ if(a==="roll"){S.page="roll";return setSite(true)}
+ if(a==="home"){S.page="home";return setSite(true)}
+ if(a==="submitp")return submitPaper();
+ if(a==="site"){S.page="home";return setSite(true)}
+ if(a==="dash")return S.auth?setSite(false):openGate();
+ if(a==="lock"){S.auth=false;S.page="home";toast("Dashboard locked");return setSite(true)}
+ if(a==="unlock")return unlock();
+ if(a==="gclose")return $("#gate").hidden=true;
+ if(a==="join")return joinClub();
+ if(a==="addmat")return addMat();
+ if(a==="addses"){const v=$("#sn").value.trim();if(!v)return toast("Type a session title first");const ns={id:sessions.length+1,title:v,date:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short"}),present:new Set(),mats:[]};sessions.push(ns);S.ses=ns.id;toast("Session created");return rerender()}
+ if(a==="markall"){members.forEach(m=>s.present.add(m.id));toast("Everyone marked present")}
+ if(a==="copyreg"){const txt=`${s.title} (${s.date})\nPresent: ${members.filter(m=>s.present.has(m.id)).map(m=>m.name).join(", ")}`;try{navigator.clipboard.writeText(txt).then(()=>toast("Register copied"),()=>toast("Copy blocked by browser"))}catch(_){toast("Copy blocked by browser")}return}
+ if(a==="gencode"){S.code=String(Math.floor(1000+Math.random()*9000))}
+ if(a==="checkin"){const n=$("#cn").value.trim().toLowerCase(),c=$("#cc").value.trim(),m=members.find(x=>x.name.toLowerCase()===n);
+  if(c!==S.code)return toast("That code doesn’t match. Check the screen at the venue.");
+  if(!m)return toast("Name not found. Use your full name or ask an official to add you.");
+  s.present.add(m.id);toast(`${m.name} checked in`)}
+ if(a==="addm"){const v=$("#nm").value.trim();if(!v)return toast("Type a full name first");members.push({id:members.length+1+Math.random(),name:v,course:"New member",contact:"",joined:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})});toast(`${v} added`)}
+ if(a==="copycap"){const v=$("#cap").value;try{navigator.clipboard.writeText(v).then(()=>toast("Caption copied"),()=>toast("Copy blocked by browser"))}catch(_){toast("Copy blocked by browser")}return}
+ if(a==="sched"){const w=$("#when").value;if(!w)return toast("Choose a date and time first");const ev=events.find(x=>x.id===S.ev);queue.push({title:ev.title,ch:S.ch,when:new Date(w).toLocaleString("en-KE",{dateStyle:"medium",timeStyle:"short"})});toast("Post scheduled")}
+ if(a==="addev"){const t2=$("#et").value.trim(),mv=$("#em").value.trim();if(!t2)return toast("Add a title first");if(mv&&!/^https:\/\/meet\.google\.com\/[a-z0-9-]+/i.test(mv))return toast("Use a Google Meet link, like https://meet.google.com/abc-defg-hij");events.unshift({id:Date.now(),title:t2,date:$("#ed").value||"Date to be confirmed",time:$("#ei").value||"Time to be confirmed",venue:$("#ev2").value||"Venue to be confirmed",summary:$("#es").value||"More details soon.",live:false,upcoming:true,poster:S.poster||null,meet:mv});S.poster=null;S.ev=events[0].id;toast("Saved as draft")}
+ rerender()});
+document.addEventListener("input",e=>{
+ if(e.target.id==="q"){S.q=e.target.value;const p=e.target.selectionStart;rerender();const q=$("#q");q.focus();q.setSelectionRange(p,p)}
+ if(e.target.id==="cap")S.draft=e.target.value;
+ if(e.target.id==="rq"){S.rq=e.target.value;$("#rlist").innerHTML=rollList()}});
+document.addEventListener("change",e=>{
+ if(e.target.id==="ses"){S.ses=+e.target.value;rerender()}
+ if(e.target.id==="ev"){S.ev=+e.target.value;rerender()}
+ if(e.target.id==="msel"){S.ses=+e.target.value;rerender()}
+ if(e.target.id==="mfile"){const f=e.target.files[0];if(f)$("#mtype").value=guess(f.name)}
+ if(e.target.id==="ep"){const f=e.target.files[0];if(!f)return;if(f.size>5242880){e.target.value="";return toast("That poster is over 5 MB. Choose a smaller image.")}const r=new FileReader();r.onload=()=>{S.poster=r.result;showPoster()};r.readAsDataURL(f)}});
+const root=document.documentElement;
+function setTheme(d){root.dataset.theme=d?"dark":"light";$("#ticon").textContent=d?"☀":"☾";$("#tlabel").textContent=d?"Light mode":"Dark mode";$("#theme").setAttribute("aria-pressed",d);$("#theme2").textContent=d?"☀":"☾"}
+$("#theme").onclick=()=>{setTheme(root.dataset.theme!=="dark");if(window.gsap)gsap.fromTo("#ticon",{rotate:-120,scale:.3},{rotate:0,scale:1,duration:.5,ease:"back.out(2)",clearProps:"transform"})};
+setTheme(matchMedia("(prefers-color-scheme:dark)").matches);
+$("#theme2").onclick=$("#theme").onclick;
+function renderSite(){
+ const pub=events.filter(e=>e.live),next=pub.find(e=>e.upcoming);
+ const days=next?Math.ceil((Date.parse(next.date)-Date.now())/864e5):NaN;
+ const mats=sessions.slice().reverse().flatMap(s=>s.mats.map(m=>({...m,ses:s}))).slice(0,6);
+ const evc=e=>`<article class="panel ev">${e.poster?`<img class="poster" src="${e.poster}" alt="Poster for ${esc(e.title)}">`:''}<h3 style="margin-top:12px">${esc(e.title)}</h3><p style="color:var(--mut);margin:6px 0">${esc(e.date)} · ${esc(e.time)}<br>${esc(e.venue)}</p><p style="margin:0 0 14px">${esc(e.summary)}</p>${e.meet?`<a class="btn" href="${esc(e.meet)}" target="_blank" rel="noopener">Join on Google Meet</a>`:''}</article>`;
+ $("#sbody").innerHTML=`<section class="shero"><div class="in"><div><h1 id="sh1">Phoenix<span>Analytics</span></h1><p>The data science and AI club at Dedan Kimathi University of Technology. We learn by building, and we share what we make.</p><button class="btn sand" data-sc="s-events">See upcoming events</button> <button class="btn ghost" style="color:#fff;border-color:#fff6" data-sc="s-join">Join the club</button></div>
+ <div class="ncard">${next?`${next.poster?`<img class="poster" src="${next.poster}" alt="Poster for ${esc(next.title)}">`:''}<small style="color:var(--sand)">Next event</small><h3>${esc(next.title)}</h3><p style="margin:6px 0 14px">${esc(next.date)} · ${esc(next.venue)}</p>${days>=0?`<div class="cd">${days}</div><small>${days===1?'day':'days'} to go</small>`:''}`:`<h3>New events soon</h3><p>Check back for the next session.</p>`}<div class="pal" aria-hidden="true"><i style="background:#000"></i><i style="background:#fff"></i><i style="background:#ECD0A8"></i><i style="background:#7A5844"></i></div></div></div></section>
+ <section class="sec"><h2 class="sh2">Learn it. Build it. Share it.</h2><div class="three"><div class="panel"><h3>Weekly sessions</h3><p style="margin:0;color:var(--mut)">Hands-on sessions in Python, data cleaning, visualisation and machine learning.</p></div><div class="panel"><h3>Build with others</h3><p style="margin:0;color:var(--mut)">Projects and showcase events where notebooks turn into things people can use.</p></div><div class="panel"><h3>Open materials</h3><p style="margin:0;color:var(--mut)">Slides, recordings and notebooks from every session, ready after the session ends.</p></div></div></section>
+ <section class="sec" id="s-events" style="padding-top:0"><h2 class="sh2">Events</h2><div class="evgrid">${pub.map(evc).join("")||'<p class="empty">No events published yet. Check back soon.</p>'}</div></section>
+ <section class="sec" id="s-res" style="padding-top:0"><h2 class="sh2">Session resources</h2><div class="panel">${mats.map(m=>`<div class="row"><div class="av">${mtypes[m.type]}</div><div class="grow"><b>${esc(m.title)}</b><small>${m.type} · ${esc(m.ses.title)}</small></div>${m.kind==="link"?`<a class="btn sand" href="${esc(m.url)}" target="_blank" rel="noopener">Open</a>`:`<button class="btn sand" data-prev="${m.id}">Preview</button>`}${m.url&&m.kind!=="link"?`<a class="btn ghost" href="${m.url}" download="${esc(m.name)}">Download</a>`:''}</div>`).join("")||'<p class="empty">Materials appear here after each session.</p>'}</div></section>
+ <section class="sec" id="s-research" style="padding-top:0"><h2 class="sh2">Research and writing</h2><div id="pwrap">${researchBlock()}</div>
+ <div class="panel" style="margin-top:22px"><h3>Publish your work</h3><p style="margin:0 0 14px;color:var(--mut)">Share a paper, article or project write-up on data science or AI. Officials review each submission before it goes live.</p><div class="form"><div class="two"><label>Title<input id="pt"></label><label>Your name<input id="pa" autocomplete="name"></label></div><label>Topic<select id="ptp">${topics.map(t=>`<option>${t}</option>`).join("")}</select></label><label>Abstract<textarea id="pab" rows="2"></textarea></label><label>Full text (leave a blank line between paragraphs)<textarea id="pb" rows="6"></textarea></label><div class="two"><label>Link to the paper (optional)<input id="pl" placeholder="https://"></label><label>Or attach a PDF (optional)<input type="file" id="pf" accept=".pdf"></label></div><button class="btn" data-act="submitp">Submit for review</button></div></div></section>
+ <section class="sec" id="s-join" style="padding-top:0"><div class="joinb"><div><h2 class="sh2" style="margin:0 0 12px">Join Phoenix Analytics</h2><p style="margin:0;color:#eadfce">Sign up and you are on the register for the next session. <b id="mc">${members.length}</b> members so far.</p></div><div class="form"><label>Full name<input id="jn" autocomplete="name"></label><label>Course<select id="jc">${courses.map(c=>`<option>${c}</option>`).join("")}</select></label><label>Phone or email<input id="jp" placeholder="So officials can reach you"></label><button class="btn sand" data-act="join">Join the club</button></div></div></section>
+ <footer class="sf">Phoenix Analytics Club – DeKUT Chapter</footer>`}
+function siteAnim(){const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;if(!window.gsap||rm)return;const kp="transform,opacity";
+ gsap.from("#sh1",{y:80,opacity:0,duration:1.1,ease:"power4.out",clearProps:kp});
+ gsap.from(".shero p,.shero .btn,.ncard",{y:30,opacity:0,stagger:.12,duration:.7,delay:.3,ease:"power3.out",clearProps:kp});
+ const c=$(".cd");if(c){const n=+c.textContent,o={v:0};gsap.to(o,{v:n,duration:1.4,delay:.7,ease:"power2.out",onUpdate:()=>c.textContent=Math.round(o.v)})}
+ const els=[...document.querySelectorAll("#sbody .sh2,#sbody .panel,#sbody .joinb")];gsap.set(els,{opacity:0,y:34});
+ const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){gsap.to(x.target,{opacity:1,y:0,duration:.7,ease:"power3.out",clearProps:kp});io.unobserve(x.target)}}),{threshold:.1});els.forEach(el=>io.observe(el))}
+function setSite(on){S.site=on;$(".app").hidden=on;$("#site").hidden=!on;const h=on?(S.page==="roll"?"rollcall":"site"):S.view;if(location.hash.slice(1)!==h)location.hash=h;if(on)showSite();else render()}
+function showSite(){scrollTo(0,0);if(S.page==="roll"){renderRoll();rollAnim()}else{renderSite();siteAnim()}}
+function joinClub(){const n=$("#jn").value.trim();if(!n)return toast("Enter your full name to join");members.push({id:members.length+1+Math.random(),name:n,course:$("#jc").value,contact:$("#jp").value.trim(),joined:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})});$("#jn").value="";$("#jp").value="";$("#mc").textContent=members.length;toast("Welcome, "+n.split(" ")[0]+". You’re now on the club register.")}
+const h=location.hash.slice(1);if(views[h])S.view=h;
+addEventListener("hashchange",()=>{const x=location.hash.slice(1);
+ if(x==="site"||x==="rollcall"){const pg=x==="rollcall"?"roll":"home";if(!S.site||S.page!==pg){S.page=pg;setSite(true)}}
+ else if(views[x]&&(S.site||x!==S.view)){S.view=x;if(!S.auth){if(!S.site){S.page="home";setSite(true)}openGate()}else if(S.site)setSite(false);else render()}});
+const topics=["Data Science","Machine Learning","Artificial Intelligence","Statistics","Other"];
+let papers=[
+ {id:1,title:"Why cleaning data takes most of the project",author:"Faith Wanjiru",topic:"Data Science",abstract:"Most of a data project is spent preparing data, not modelling it. This note explains why, and how to make the work repeatable.",body:"Real datasets arrive with missing values, inconsistent labels and duplicated rows. Fixing these by hand once is fine. Fixing them again next month is where a script, or a notebook that runs top to bottom, pays for itself.\n\nA useful habit is to keep the raw file untouched and write every change as code. Then anyone in the club can rerun the steps and get the same result.\n\nSample content for the demo.",url:"",fileUrl:"",fileName:"",status:"published",date:"12 Nov 2026"},
+ {id:2,title:"A gentle introduction to gradient descent",author:"Kevin Otieno",topic:"Machine Learning",abstract:"A plain-language look at how a model learns by taking small steps downhill.",body:"Imagine standing on a hillside in fog, trying to reach the valley. You feel the slope under your feet and step downhill. Gradient descent does the same with a loss function: it measures the slope and nudges the parameters in the direction that lowers the error.\n\nThe learning rate sets the step size. Too large and you overshoot the valley. Too small and training takes forever.\n\nSample content for the demo.",url:"",fileUrl:"",fileName:"",status:"published",date:"5 Nov 2026"},
+ {id:3,title:"Can small language models help local farmers?",author:"Brian Kamau",topic:"Artificial Intelligence",abstract:"A short proposal on whether compact language models could answer farming questions offline.",body:"This is a proposal for a student project. The idea is to test whether a small model running on a laptop can answer common crop questions without an internet connection.\n\nSample content for the demo.",url:"",fileUrl:"",fileName:"",status:"pending",date:"24 Nov 2026"}];
+function researchBlock(){const pub=papers.filter(p=>p.status==="published"&&(S.topic==="All"||p.topic===S.topic));
+ return `<div class="chips" style="margin-bottom:16px">${["All",...topics].map(t=>`<button class="chip" data-topic="${t}" aria-pressed="${S.topic===t}">${t}</button>`).join("")}</div><div class="evgrid">${pub.map(p=>`<article class="panel"><span class="pill">${esc(p.topic)}</span><h3 style="margin:10px 0 4px;font-size:20px;line-height:1.15">${esc(p.title)}</h3><small style="color:var(--mut)">${esc(p.author)} · ${esc(p.date)}</small><p style="margin:10px 0 14px">${esc(p.abstract)}</p><button class="btn" data-read="${p.id}">Read</button></article>`).join("")||'<p class="empty">Nothing published under this topic yet. Be the first to submit.</p>'}</div>`}
+function researchView(){const n=papers.filter(p=>p.status==="pending").length;
+ return `<div class="head"><div><h2>Research</h2><p>Review writing submitted from the public site. ${n?n+" waiting for review.":"Nothing waiting."}</p></div></div><div class="panel">${papers.map(p=>`<div class="row"><div class="av">${p.status==="pending"?"?":"✓"}</div><div class="grow"><b>${esc(p.title)}</b> <span class="pill ${p.status==="published"?'live':''}">${p.status==="published"?'Published':'Pending'}</span><small>${esc(p.author)} · ${esc(p.topic)} · ${esc(p.date)}</small></div><button class="btn sand" data-read="${p.id}">Read</button><button class="btn" data-appr="${p.id}">${p.status==="published"?'Unpublish':'Approve and publish'}</button><button class="btn ghost" data-delp="${p.id}">Delete</button></div>`).join("")||'<p class="empty">No submissions yet. Writing sent from the public site appears here.</p>'}</div>`}
+function openArticle(p){$("#mbody").innerHTML=`<article style="text-align:left;max-height:64vh;overflow:auto;padding-right:6px"><span class="pill">${esc(p.topic)}</span><h3 style="font-size:30px;line-height:1.1;margin:10px 0 4px">${esc(p.title)}</h3><small style="color:var(--mut)">${esc(p.author)} · ${esc(p.date)}</small><p style="font-weight:600;margin:16px 0">${esc(p.abstract)}</p>${(p.body||"").split(/\n\s*\n/).filter(Boolean).map(x=>`<p style="max-width:68ch">${esc(x)}</p>`).join("")}<div class="toolbar">${p.url?`<a class="btn sand" href="${esc(p.url)}" target="_blank" rel="noopener">Open the paper</a>`:''}${p.fileUrl?`<a class="btn ghost" href="${p.fileUrl}" download="${esc(p.fileName)}">Download PDF</a>`:''}</div></article>`;$("#modal").hidden=false;if(window.gsap)gsap.fromTo(".mbox",{y:40,opacity:0,scale:.96},{y:0,opacity:1,scale:1,duration:.4,ease:"power3.out",clearProps:"transform,opacity"})}
+function submitPaper(){const t=$("#pt").value.trim(),a=$("#pa").value.trim(),ab=$("#pab").value.trim(),b=$("#pb").value.trim(),l=$("#pl").value.trim(),f=$("#pf").files[0];
+ if(!t||!a)return toast("Add a title and your name first");
+ if(!ab&&!b)return toast("Add an abstract or the full text");
+ if(l&&!/^https?:\/\//i.test(l))return toast("The link must start with https://");
+ if(f&&f.size>10485760)return toast("That file is over 10 MB. Choose a smaller PDF.");
+ papers.unshift({id:Date.now(),title:t,author:a,topic:$("#ptp").value,abstract:ab||b.slice(0,220),body:b,url:l,fileUrl:f?URL.createObjectURL(f):"",fileName:f?f.name:"",status:"pending",date:new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})});
+ ["pt","pa","pab","pb","pl","pf"].forEach(i=>$("#"+i).value="");toast("Submitted. Officials will review it before it goes live.")}
+function xl(rows,name,sheet){
+ if(window.XLSX){const ws=XLSX.utils.aoa_to_sheet(rows);ws["!cols"]=rows[0].map((_,i)=>({wch:Math.min(40,Math.max(...rows.map(r=>String(r[i]??"").length))+2)}));const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,sheet);XLSX.writeFile(wb,name+".xlsx");return toast("Excel file downloaded")}
+ const csv=rows.map(r=>r.map(c=>'"'+String(c??"").replace(/"/g,'""')+'"').join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv"}));a.download=name+".csv";a.click();toast("Downloaded as CSV, which opens in Excel")}
+function xlMem(){xl([["No.","Name","Course","Contact","Joined"],...members.map((m,i)=>[i+1,m.name,m.course,m.contact||"",m.joined||"Sample data"])],"phoenix-members","Members")}
+function xlAtt(){const hd=["Name","Course",...sessions.map(s=>s.title+" ("+s.date+")"),"Sessions attended"];xl([hd,...members.map(m=>{const c=sessions.map(s=>s.present.has(m.id));return [m.name,m.course,...c.map(v=>v?"Present":"Absent"),c.filter(Boolean).length]})],"phoenix-attendance","Attendance")}
+function membersView(){return `<div class="head"><div><h2>Members</h2><p>${members.length} registered. Sign-ups from the public site appear here.</p></div><button class="btn" data-act="xl-mem">Download Excel</button></div><div class="panel">${members.map(m=>`<div class="row"><div class="av">${initials(m.name)}</div><div class="grow"><b>${esc(m.name)}</b><small>${esc(m.course)}${m.contact?" · "+esc(m.contact):""} · Joined ${esc(m.joined||"Sample data")}</small></div></div>`).join("")}</div>`}
+function rollList(){const s=sessions.find(x=>x.open),q=(S.rq||"").toLowerCase();if(!s)return"";
+ return members.filter(m=>m.name.toLowerCase().includes(q)).map(m=>`<div class="row"><div class="av">${initials(m.name)}</div><div class="grow"><b>${esc(m.name)}</b><small>${esc(m.course)}</small></div>${s.present.has(m.id)?'<span class="pill live">Present</span>':`<button class="btn" data-here="${m.id}">I’m here</button>`}</div>`).join("")||'<p class="empty">No name matches. Check the spelling, or join the club first.</p>'}
+function renderRoll(){const s=sessions.find(x=>x.open);
+ $("#sbody").innerHTML=`<section class="shero" style="padding-bottom:clamp(30px,5vw,60px)"><div class="in" style="grid-template-columns:1fr"><div><h1 class="rc" style="font-size:clamp(46px,9vw,110px)">Roll call</h1><p class="rc" style="margin-bottom:0">${s?`Marking attendance for <b style="color:var(--sand)">${esc(s.title)}</b> (${esc(s.date)}). Find your name and tap I’m here.`:'Roll call opens when an official starts a session.'}</p></div></div></section>
+ <section class="sec" style="padding-top:30px">${s?`<div class="panel rc"><div class="toolbar"><input id="rq" placeholder="Search your name" aria-label="Search your name" value="${esc(S.rq||"")}"><span class="pill live" id="rcount">${s.present.size} of ${members.length} present</span></div><div id="rlist">${rollList()}</div><p style="color:var(--mut);margin:14px 0 0;font-size:13px">Not on the list?</p><button class="btn ghost" style="margin-top:8px" data-sc="s-join">Join the club first</button></div>`:`<div class="panel rc"><h3>No roll call is open</h3><p style="color:var(--mut);margin:0">Ask an official to open roll call for today’s session, then come back to this page.</p></div>`}</section><footer class="sf">Phoenix Analytics Club – DeKUT Chapter</footer>`}
+function rollAnim(){if(!window.gsap||matchMedia("(prefers-reduced-motion:reduce)").matches)return;gsap.from(".rc",{y:30,opacity:0,stagger:.1,duration:.6,ease:"power3.out",clearProps:"transform,opacity"})}
+const PASS="pipeline";
+function openGate(){$("#gate").hidden=false;const p=$("#gpw");p.value="";p.focus();if(window.gsap)gsap.fromTo(".gbox",{y:30,opacity:0},{y:0,opacity:1,duration:.4,ease:"power3.out",clearProps:"transform,opacity"})}
+function unlock(){const p=$("#gpw");if(p.value.trim()!==PASS){toast("That password isn’t right. Try again.");if(window.gsap)gsap.fromTo(".gbox",{x:-12},{x:0,duration:.6,ease:"elastic.out(1,.25)",clearProps:"transform"});p.select();return}S.auth=true;$("#gate").hidden=true;toast("Dashboard unlocked");setSite(false)}
+$("#gpw").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
+S.auth=false;S.page=h==="rollcall"?"roll":"home";setSite(true);if(views[h])openGate();
+</script>
+</body>
+</html>
